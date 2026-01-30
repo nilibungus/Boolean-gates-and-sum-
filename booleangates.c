@@ -1,11 +1,4 @@
-/******************************************************************************
 
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 
 int AND (int a, int b);
@@ -52,11 +45,17 @@ int main(void){
   int result[max + 1];
   SUM(arr1, n1, arr2, n2, result);
   
-  
+  if (result[0] == 1){
   for (int i = 0; i < max + 1; i++){
     printf("%d", result[i]);
   }
 
+} else {
+    for (int i = 1; i < max + 1; i++){
+    printf("%d", result[i]);
+  }
+}
+    
 }
 
 int AND (int a, int b){return a && b;}
