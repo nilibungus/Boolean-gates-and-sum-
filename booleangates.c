@@ -70,18 +70,58 @@ void FULLADDER(int a, int b, int c_in, int *c_out, int*sum){
     *c_out = AND(a, b) + AND(c_in, XOR(a, b));}
 
 void SUM(int arr1[], int n1, int arr2[], int n2, int result[]){
-   //apply halfadder to the last indices of the arrays:
-   int s, c;
-   HALFADDER(arr1[n1 - 1], arr2[n2 - 1], &s, &c);
-   result[(n1 > n2? n1: n2)] = s;
-   int min; 
+   // get max and min lengths of the two input arrays
+   
+   int max; 
+   if (n1 > n2) {
+      max = n1;
+   } else{ max = n2;
+}
+    int min; 
    if (n1 > n2) {
       min = n2;
    } else{ min = n1;
 }
-   for(int i = min -2; i >= 0; i--){
+
+   // get the longer array 
+   int bigarr[max];
+   if (n1 > n2){
+       for(int i = 0; i < n1; i++){
+           bigarr[i] = arr1[i];
+       }
+   } else {
+       for(int i = 0; i < n2; i++){
+           bigarr[i] = arr2[i];
+       }
+   }
+   // get the shorter array
+   int smallarr[min];
+   if (n1 > n2){
+       for(int i = 0; i < n2; i++){
+           smallarr[i] = arr2[i];
+       }
+   } else {
+       for(int i = 0; i < n1; i++){
+           smallarr[i] = arr1[i];
+       }
+   }
+   // get an array with the length of the longer array which has zeros in the first positions and then the shorter array, i.e: if we have 111 and 11 get 011
+   int arr3[max];
+   for(int i = 0; i < max - min; i ++){
+       arr3[i] = 0;
+   }
+   for(int i = (max - min) ; i < max; i ++){
+       arr3[i] = smallarr[i - (max - min)];
+   }
+   
+   //sum the "zeroed" array and the longest array 
+   int c = 0;
+   
+  
+   for(int i = max - 1; i >= 0; i--){
       int c_out;
-      FULLADDER(arr1[i], arr2[i], c, &c_out, &s);
+      int s;
+      FULLADDER(bigarr[i], arr3[i], c, &c_out, &s);
       result[i + 1] = s;
       c = c_out;
    }
