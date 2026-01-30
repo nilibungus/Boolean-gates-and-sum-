@@ -1,0 +1,1 @@
+A variable-length binary adder implemented in C using fundamental logic gates (AND, OR, XOR, NOT) and arrays. It models a ripple-carry adder, manually handling carry propagation across all bits, and outputs the correct binary sum for any two input numbers.
